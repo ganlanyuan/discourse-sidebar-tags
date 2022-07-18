@@ -1,10 +1,16 @@
 {{#if isDiscoveryList}}
-  <div class="discourse-home-tags">
-    <div class="home-tags-list">
-      <h3 class="tags-list-title">{{theme-i18n "tag_home.title"}}</h3>
-        {{#each tagList as |t|}}
-          {{discourse-tag t.id style="box"}}
-        {{/each}}
+  <div class="wrap">
+    <div class="discourse-home-tags">
+      <div class="home-tags-list">
+        <h3 class="tags-list-title">{{theme-i18n "tag_home.title"}}</h3>
+          {{#each tagList as |tag|}}
+            <div class="tag-box">
+              {{discourse-tag tag.id description=tag.description isPrivateMessage=isPrivateMessage pmOnly=tag.pmOnly tagsForUser=tagsForUser}} {{#if tag.pmOnly}}{{d-icon "far-envelope"}}{{/if}}{{#if tag.totalCount}} <span class="tag-count">{{tag.totalCount}}</span>{{/if}}
+            </div>
+
+            {{!-- discourse-tag t.id style="box" --}}
+          {{/each}}
+        </div>
       </div>
-    </div>
+  </div>
 {{/if}}
