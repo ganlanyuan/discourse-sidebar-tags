@@ -45,12 +45,12 @@ export default {
             ajax("/tags.json").then(function (result) {
               // let tagsCategories = result.extras.categories;
               let tagsAll = result.tags;
+              let foundTags;
               if (settings.sort_by_popularity) {
                 foundTags = tagsAll.sort(tagCount);
               } else {
                 foundTags = tagsAll.sort(alphaId);
               }
-              // let foundTags;
 
               // if (url.match(/^\/c\/(.*)/)) {
               //   // if category
