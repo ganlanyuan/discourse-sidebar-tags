@@ -1,0 +1,10 @@
+{{#if isDiscoveryList}}
+  <div class="discourse-home-tags">
+    <div class="home-tags-list">
+      <h3 class="tags-list-title">{{theme-i18n "tag_home.title"}}</h3>
+        {{#each tagList as |t|}}
+          {{discourse-tag t.id style="box"}}
+        {{/each}}
+      </div>
+    </div>
+{{/if}}

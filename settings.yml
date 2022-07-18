@@ -5,7 +5,7 @@ number_of_tags:
   default: 50
   min: 3
   max: 200
-  description: Number of tags to display in sidebar
+  description: Number of tags to display in homepage
 sort_by_popularity:
  default: false
  type: bool
