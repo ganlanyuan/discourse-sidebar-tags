@@ -32,18 +32,13 @@ export default {
       api.onPageChange((url) => {
         // let tagRegex = /^\/tag[s]?\/(.*)/;
         if (settings.enable_tag_cloud) {
-          // if (this.discoveryList || url.match(tagRegex)) {
-            // tag pages aren't discovery lists for some reason?
-            // checking for discoveryList makes sure it's not loading on user profiles and other topic lists
-
-            if (this.isDestroyed || this.isDestroying) {
-              return;
-            }
+          if (url === "/" || url === homeRoute ){
+            document.querySelector("html").classList.add("tags-home");
+            if (this.isDestroyed || this.isDestroying) { return; }
 
             component.set("isDiscoveryList", true);
 
             ajax("/tags.json").then(function (result) {
-              // let tagsCategories = result.extras.categories;
               let tagsAll = result.tags;
               let foundTags;
               if (settings.sort_by_popularity) {
@@ -51,42 +46,6 @@ export default {
               } else {
                 foundTags = tagsAll.sort(alphaId);
               }
-
-              // if (url.match(/^\/c\/(.*)/)) {
-              //   // if category
-              //   const controller = container.lookup(
-              //     "controller:navigation/category"
-              //   );
-              //   let category = controller.get("category");
-              //   component.set("category", category);
-
-              //   if (tagsCategories.find(({ id }) => id === category.id)) {
-              //     component.set("hideSidebar", false);
-              //     // if category has a tag list
-              //     let categoryId = tagsCategories.find(
-              //       ({ id }) => id === category.id
-              //     );
-              //     if (settings.sort_by_popularity) {
-              //       foundTags = categoryId.tags.sort(tagCount);
-              //     } else {
-              //       foundTags = categoryId.tags.sort(alphaId);
-              //     }
-              //   } else {
-              //     // if a category doesn't have a tag list, don't show tags
-              //     document
-              //       .querySelector(".topic-list")
-              //       .classList.remove("with-sidebar");
-              //     return;
-              //   }
-              // } else {
-              //   // show tags on generic topic pages like latest, top, etc... also tag pages
-              //   component.set("hideSidebar", false);
-              //   if (settings.sort_by_popularity) {
-              //     foundTags = tagsAll.sort(tagCount);
-              //   } else {
-              //     foundTags = tagsAll.sort(alphaId);
-              //   }
-              // }
 
               if (
                 !(
@@ -97,9 +56,10 @@ export default {
                 component.set("tagList", foundTags.slice(0, settings.number_of_tags));
               }
             });
-          // } else {
-          //   component.set("isDiscoveryList", false);
-          // }
+          } else {
+            document.querySelector("html").classList.remove("tags-home");
+            component.set("isDiscoveryList", false);
+          }
         }
 
       });
