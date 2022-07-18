@@ -7,7 +7,7 @@
           <div class="tags-list tag-list">
             {{#each tagList as |tag|}}
               <div class="tag-box">
-                {{discourse-tag tag.id description=tag.description isPrivateMessage=isPrivateMessage pmOnly=tag.pmOnly tagsForUser=tagsForUser}} {{#if tag.pmOnly}}{{d-icon "far-envelope"}}{{/if}}{{#if tag.totalCount}} <span class="tag-count">{{tag.totalCount}}</span>{{/if}}
+                {{discourse-tag tag.id description=tag.description isPrivateMessage=isPrivateMessage pmOnly=tag.pmOnly tagsForUser=tagsForUser}} {{#if tag.pmOnly}}{{d-icon "far-envelope"}}{{/if}}{{#if tag.count}} <span class="tag-count">{{tag.count}}</span>{{/if}}
               </div>
 
               {{!-- discourse-tag t.id style="box" --}}
