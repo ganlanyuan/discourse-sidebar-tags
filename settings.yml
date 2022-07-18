@@ -1,6 +1,6 @@
 enable_tag_cloud:
   default: true
-  description: Enable tags sidebar
+  description: Enable homepage tags
 number_of_tags:
   default: 50
   min: 3

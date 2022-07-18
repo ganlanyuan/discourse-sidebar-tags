@@ -25,13 +25,12 @@ function tagCount(a, b) {
 
 export default {
   setupComponent(attrs, component) {
-    component.set("hideSidebar", true);
-    document.querySelector(".topic-list").classList.add("with-sidebar");
+    // component.set("hideSidebar", true);
+    // document.querySelector(".topic-list").classList.add("with-sidebar");
 
     withPluginApi("0.11", (api) => {
       api.onPageChange((url) => {
-        let tagRegex = /^\/tag[s]?\/(.*)/;
-
+        // let tagRegex = /^\/tag[s]?\/(.*)/;
         if (settings.enable_tag_cloud) {
           if (this.discoveryList || url.match(tagRegex)) {
             // tag pages aren't discovery lists for some reason?
@@ -102,6 +101,7 @@ export default {
             component.set("isDiscoveryList", false);
           }
         }
+
       });
     });
   },
