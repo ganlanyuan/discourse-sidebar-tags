@@ -25,12 +25,11 @@ function tagCount(a, b) {
 
 export default {
   setupComponent(attrs, component) {
-    // component.set("hideSidebar", true);
-    // document.querySelector(".topic-list").classList.add("with-sidebar");
+    var topMenuRoutes = component.siteSettings.top_menu.split('|').map(function(route) {return '/' + route});
+    var homeRoute = topMenuRoutes[0];
 
     withPluginApi("0.11", (api) => {
       api.onPageChange((url) => {
-        // let tagRegex = /^\/tag[s]?\/(.*)/;
         if (settings.enable_tag_cloud) {
           if (url === "/" || url === homeRoute ){
             document.querySelector("html").classList.add("tags-home");
@@ -59,6 +58,9 @@ export default {
           } else {
             document.querySelector("html").classList.remove("tags-home");
             component.set("isDiscoveryList", false);
+
+            let home_tags = document.querySelector(".home-tags-wrap");
+            if(home_tags) { home_tags.parentNode.removeChild(home_tags); }
           }
         }
 
